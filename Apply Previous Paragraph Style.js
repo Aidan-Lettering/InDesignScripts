@@ -1,4 +1,4 @@
-//--------Select Previous Paragraph Style--------//
+//--------Apply Previous Paragraph Style--------//
 /*
     When you have a text frame selected, this 
     script will select the previous Paragraph 

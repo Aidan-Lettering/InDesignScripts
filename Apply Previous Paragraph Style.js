@@ -38,18 +38,25 @@ function isError(obj) {
 }
 
 function applyPreviousStyle(currentStyle){
+    var allDocParaStyles = app.activeDocument.allParagraphStyles;
+    var allStylesCount = allDocParaStyles.length;
     
-    var styles = app.activeDocument.paragraphStyles;
-    var styleCount = styles.length;
-    
-    if(styles.firstItem() == currentStyle){
-        //go to last if at the first
-        return styles.lastItem();
+    var index = 0;
+    for (var i = 0; i < allStylesCount; i++) {
+        if(allDocParaStyles[i].name === currentStyle.name){
+            index = i;
+            i = allStylesCount;
+        }
+    }
+
+    if(index > 0){
+        //go to previous
+        return allDocParaStyles[index - 1];
     }
     else{
-        //go to previous
-        return styles.previousItem(currentStyle);
-    }   
+        //go to last
+        return allDocParaStyles[allStylesCount -1];
+    }
 }
 
 main();

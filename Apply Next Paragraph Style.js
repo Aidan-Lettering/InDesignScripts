@@ -39,17 +39,28 @@ function isError(obj) {
 
 function applyNextStyle(currentStyle){
     
-    var styles = app.activeDocument.paragraphStyles;
-    var styleCount = styles.length;
+    var allDocParaStyles = app.activeDocument.allParagraphStyles;
+    var allStylesCount = allDocParaStyles.length;
+    //var styles = app.activeDocument.paragraphStyles;
+    //var styleCount = styles.length;
     
-    if(styles.lastItem() == currentStyle){
-        //go to first if at the last
-        return styles.firstItem();
+    var index = 0;
+    for (var i = 0; i < allStylesCount; i++) {
+        if(allDocParaStyles[i].name === currentStyle.name){
+            index = i;
+            i = allStylesCount;
+        }
+    }
+    //alert('Index: ' + index);
+
+    if(index < allStylesCount -1 ){
+        //go to next
+        return allDocParaStyles[index + 1];
     }
     else{
-        //go to next
-        return styles.nextItem(currentStyle);
-    }   
+        //go to first
+        return allDocParaStyles[0];
+    }
 }
 
 main();
